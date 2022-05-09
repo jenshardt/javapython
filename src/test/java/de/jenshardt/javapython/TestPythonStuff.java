@@ -24,8 +24,7 @@ public class TestPythonStuff {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("python");
         engine.eval(new FileReader(resolvePythonScriptPath("hello.py")), context);
-        assertEquals("Should contain script output: ", "Hello Baeldung Readers!!", output.toString()
-            .trim());
+        assertEquals("Hello strange world!", output.toString().trim());
     }
 
     private String resolvePythonScriptPath(String filename) {
