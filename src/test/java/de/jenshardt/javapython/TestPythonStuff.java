@@ -12,11 +12,12 @@ import javax.script.ScriptEngineManager;
 import javax.script.SimpleScriptContext;
 
 import org.junit.jupiter.api.Test;
+import org.python.util.PythonInterpreter;
 
 public class TestPythonStuff {
 
     @Test
-    public void givenPythonScriptEngineIsAvailable_whenScriptInvoked_thenOutputDisplayed() throws Exception {
+    public void UsingScriptEngine() throws Exception {
         StringWriter output = new StringWriter();
         ScriptContext context = new SimpleScriptContext();
         context.setWriter(output);
@@ -25,6 +26,17 @@ public class TestPythonStuff {
         ScriptEngine engine = manager.getEngineByName("python");
         engine.eval(new FileReader(resolvePythonScriptPath("hello.py")), context);
         assertEquals("Hello strange world!", output.toString().trim());
+    }
+
+    @Test
+    public void givenPythonInterpreter_whenPrintExecuted_thenOutputDisplayed() {
+        try (PythonInterpreter pyInterp = new PythonInterpreter()) {
+            StringWriter output = new StringWriter();
+            pyInterp.setOut(output);
+
+            pyInterp.exec("print('Hello strange world!')");
+            assertEquals("Hello strange world!", output.toString().trim());
+        }
     }
 
     private String resolvePythonScriptPath(String filename) {
