@@ -29,7 +29,7 @@ public class TestPythonStuff {
     }
 
     @Test
-    public void givenPythonInterpreter_whenPrintExecuted_thenOutputDisplayed() {
+    public void UsingJython() {
         try (PythonInterpreter pyInterp = new PythonInterpreter()) {
             StringWriter output = new StringWriter();
             pyInterp.setOut(output);
